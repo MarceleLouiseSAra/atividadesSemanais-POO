@@ -105,6 +105,7 @@ class Festeiro:
                     else:
                         print(f"\n{self.cpf}")
                         print("\nAqui está a sua bebida!")
+                        self.tem_desconto()
                         break
                 else:
                     print("\nAqui está a sua bebida!")
@@ -139,8 +140,18 @@ class Festeiro:
             if entrada == cupom:
                 controle = 1
                 self.cupomDeDesconto.remove(cupom)
-                print("\nCupom utilizado com sucesso.")
-                break
+                print("\nCupom utilizado com sucesso! Você ainda possui estes cupons disponíveis: ", end = "")
+                loop = 1
+                for cupom in self.cupomDeDesconto:
+                    print(cupom, end = "")
+                    if(loop == len(self.cupomDeDesconto)-1):
+                        print(" ou ", end = "")
+                    elif(loop == len(self.cupomDeDesconto)):
+                        print(".", end = "\n")
+                    else:
+                        print(", ", end = "")
+                    loop += 1
+                    break
             else:
                 controle = 0
                 continue
@@ -163,9 +174,5 @@ def main():
 
     objeto0.cpf = ""
     objeto0.pedir_bebida()
-
-    objeto0.tem_desconto()
-
-    print(f"{objeto0.cupomDeDesconto}")
 
 main()
