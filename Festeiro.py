@@ -42,7 +42,7 @@ toddynho = {
     "alcoolica": False
 }
 
-sucoDeLarnja = {
+sucoDeLaranja = {
     "nome": "suco de laranja",
     "alcoolica": False
 }
@@ -52,7 +52,7 @@ agua = {
     "alcoolica": False
 }
 
-bebidas = [cerveja, cachaçaCoquinho, vinho, toddynho, sucoDeLarnja, agua]
+bebidas = [cerveja, cachaçaCoquinho, vinho, toddynho, sucoDeLaranja, agua]
 
 class Festeiro:
     def __init__(self, nome : str, cpf : str, cupomDeDesconto : str) -> None:
