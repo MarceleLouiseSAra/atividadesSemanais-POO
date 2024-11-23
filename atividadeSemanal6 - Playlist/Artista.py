@@ -1,6 +1,7 @@
 #Artista.py
 
-from interfaces import interfaceArtista
+from interfaces import interfaceArtista, interfaceManipularDados
+import json
 
 def verificaEntrada() -> str:
     
@@ -18,7 +19,6 @@ def verificaEntrada() -> str:
                     print("\nEntrada inválida. Forneça uma nova entrada.")
                     controle = 0
                     break
-
         else:
             return entrada
         
@@ -28,7 +28,7 @@ def verificaEntrada() -> str:
             continue
 
 
-class Artista(interfaceArtista):
+class Artista(interfaceArtista, interfaceManipularDados):
     def __init__(self, nome : str, generoMusical : str) -> None:
         self.__nome = nome
         self.__generoMusical = generoMusical
@@ -47,7 +47,7 @@ class Artista(interfaceArtista):
         return self.__listaDeMusicas
     
     @generoMusical.setter
-    def generoMusical(self, generoMusical : str) -> None:
+    def generoMusical(self, generoMusical : str) -> None: #perguntar pra gabriela se o setter retorna None
         self.__generoMusical = generoMusical
 
     def setGeneroMusical(self) -> None:
@@ -67,3 +67,14 @@ class Artista(interfaceArtista):
         ultimoItemDaLista["duração"] = duração
         ultimoItemDaLista["ano"] = ano
 
+        self.writeJSon()
+
+    def loadJSon(self) -> None:
+        nomeDoArquivo = self.__nome + "_discografia.json"
+        with open(nomeDoArquivo, "r") as arquivo:
+            self.__listaDeMusicas = json.load(arquivo)
+    
+    def writeJSon(self) -> None:
+        nomeDoArquivo = self.__nome + "_discografia.json"
+        with open(nomeDoArquivo, "w") as arquivo:
+            json.dump(self.__listaDeMusicas, arquivo, ensure_ascii=False, indent = 4)
